@@ -1,24 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import Setting from "./Setting";
+import Settings from "./Settings";
 import Counter from "./Counter";
 
 function App() {
-    const defaultStart: number = 0;
-    const defaultMax: number = 0;
-    const [value, setValue] = useState<number>(0)
-    const [maxValue, setMaxValue] = useState<number>(defaultMax)
-    const [startValue, setStartValue] = useState<number>(defaultStart)
 
-    const incValue = () => {
-        if (value < maxValue) {
-            setValue(value + 1)
-        }
-    }
-    const resetValue = () => {
-        setValue(startValue)
-    }
+    const [startValue, setStartValue] = useState<number>(0)
+    const [maxValue, setMaxValue] = useState<number>(1)
+    const [settings, setSettings] = useState(false)
 
+
+
+    const setOnHandler = () => {
+        setSettings(true)
+    }
+    const setOffHandler = () => {
+        setSettings(false)
+    }
 
     useEffect(() => {
         let valueAsString = localStorage.getItem('MaxValue')
@@ -41,35 +39,40 @@ function App() {
     }, [])
     useEffect(() => {
         localStorage.setItem('StartValue', JSON.stringify(startValue))
-    },  [startValue])
-
-
-    useEffect(() => {
-        let valueAsString = localStorage.getItem('currentValue')
-        if (valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            setValue(newValue)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem('currentValue', JSON.stringify(startValue))
     }, [startValue])
+
+    // useEffect(() => {
+    //     let valueAsString = localStorage.getItem('currentValue')
+    //     if (valueAsString) {
+    //         let newValue = JSON.parse(valueAsString)
+    //         setValue(newValue)
+    //     }
+    // }, [])
+    // useEffect(() => {
+    //     localStorage.setItem('currentValue', JSON.stringify(startValue))
+    // }, [startValue])
 
     return (
         <div className="App">
-            <Counter
-                value={startValue}
-                incValue={incValue}
-                resetValue={resetValue}
-            />
-            <Setting
+            {settings ?
+                <Settings
+                    maxValue={maxValue}
+                    startValue={startValue}
+                    setMaxValue={setMaxValue}
+                    setStartValue={setStartValue}
+                    set={setOffHandler}
 
-                maxValue={maxValue}
-                startValue={startValue}
-                setMaxValue={setMaxValue}
-                setStartValue={setStartValue}
+                />
+                :
+                <Counter
+                    value={startValue}
+                     settings={setOnHandler}
+                    maxValue={maxValue}
 
-            />
+                />
+            }
+
+
         </div>
     );
 }

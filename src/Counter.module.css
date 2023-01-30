@@ -1,0 +1,29 @@
+.counterBlock {
+    box-sizing: border-box;
+    border: 2px solid;
+    border-radius: 3px;
+    padding: 10px;
+    background: darkmagenta;
+
+}
+
+.displayBlock {
+    font-size: 36px;
+    background: mistyrose;
+    display: flex;
+    justify-content: center;
+    border: 2px solid;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 5px
+
+
+}
+
+.btn {
+    margin: 5px;
+    background: darkviolet;
+    border: 2px solid;
+    border-radius: 3px;
+    padding: 5px;
+}
