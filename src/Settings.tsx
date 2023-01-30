@@ -53,7 +53,7 @@ const Settings = (props: SettingPropsType) => {
                 <div>
                     <button className={s.btn} onClick={saveSetHandler}>Save
                     </button>
-                    <button className={s.btn} onClick={(e) => set()}>Set
+                    <button className={s.btn} onClick={(e) => set()}>Close
                     </button>
                 </div>
             </div>
